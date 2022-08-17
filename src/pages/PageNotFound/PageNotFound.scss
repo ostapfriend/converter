@@ -1,0 +1,25 @@
+@mixin fontTitleTryAgain {
+  color: #4a58a0;
+  font-size: 40px;
+  text-align: center;
+
+}
+
+.pageNotFound {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 200px;
+
+  gap: 20px;
+
+  &__title {
+    @include fontTitleTryAgain();
+  }
+
+  &__tryAgain {
+    @include fontTitleTryAgain();
+  }
+}
+
