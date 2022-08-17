@@ -1,42 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import {FormControl, Paper, TextField, Select} from '@material-ui/core';
 import './Converter.scss';
+import { getAllCurrency } from '../../api/api';
 
 function Converter() {
   const [queryFrom, setQueryFrom] = useState(1);
   const [queryTo, setQueryTo] = useState(1);
-  const [currencyFrom, setCuurencyFrom] = useState({});
+  const [currencyFrom, setCurrencyFrom] = useState({});
   const [currencyTo, setCurrencyTo] = useState({});
   const [valueFrom, setValueFrom] = useState(1);
   const [valueTo, setValueTo] = useState(1);
 
   /* FIRST RENDER */
   useEffect(() => {
-    getData();
+    getAllCurrency()
+      .then(res => {
+        setCurrencyFrom(res.rates);
+        setCurrencyTo(res.rates)
+      });
   }, [])
 
   /* NEXT RERENDERS */
   useEffect(() => {
     converter();
   }, [valueFrom, valueTo, queryFrom, queryTo])
-
-  /* FUNCTIONS */
-  async function getData() {
-    const myHeaders = new Headers();
-    myHeaders.append("apikey", "dRJxVeyWYezfmm94df8CS5EZLIEK3vq9");
-
-    const requestOptions = {
-      method: 'GET',
-      headers: myHeaders
-    };
-
-    await fetch("https://api.apilayer.com/exchangerates_data/latest?&base=USD", requestOptions)
-      .then(response => response.json())
-      .then(result => {
-        setCuurencyFrom(result.rates);
-        setCurrencyTo(result.rates);
-      })
-  }
 
   function converter(e) {
     let num = (valueTo/valueFrom)*queryFrom;
