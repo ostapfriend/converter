@@ -5,6 +5,7 @@ function Header() {
   const [amountUSD, setAmountUSD] = useState(0);
   const [amountEUR, setAmountEUR] = useState(0);
 
+  /* USED ​​FETCH TO THE SERVER BECAUSE THAT SERVER CAN CONVERT MY CURRENCY ITSELF */
   useEffect(() => {
     const myHeaders = new Headers();
     myHeaders.append("apikey", "dRJxVeyWYezfmm94df8CS5EZLIEK3vq9");
@@ -24,9 +25,6 @@ function Header() {
       .then(res => setAmountEUR(res.result))
       .catch(error => console.log('error', error));
   }, [])
-
-
-
 
   return (
     <div className="header">

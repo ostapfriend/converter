@@ -10,14 +10,17 @@ function Converter() {
   const [valueFrom, setValueFrom] = useState(1);
   const [valueTo, setValueTo] = useState(1);
 
+  /* FIRST RENDER */
   useEffect(() => {
     getData();
   }, [])
 
+  /* NEXT RERENDERS */
   useEffect(() => {
     converter();
   }, [valueFrom, valueTo, queryFrom, queryTo])
 
+  /* FUNCTIONS */
   async function getData() {
     const myHeaders = new Headers();
     myHeaders.append("apikey", "dRJxVeyWYezfmm94df8CS5EZLIEK3vq9");
@@ -59,8 +62,6 @@ function Converter() {
     <div>
       <Paper className="paper">
         <h3>Currency Converter</h3>
-
-        {/* // onSubmit={converter} */}
         <form>
           <div className="container">
             <TextField
@@ -75,8 +76,8 @@ function Converter() {
               variant='outlined'
             >
               <Select native>
-                {Object.keys(currencyFrom).map((value, index) =>
-                    <option key={index} value={currencyFrom[value]}>{value}</option>
+                {Object.keys(currencyFrom).map((value,) => //I wrote the value as a key because I don't have an id property. It's bad practice to use an index for a key, so I didn't use it
+                    <option key={value} value={currencyFrom[value]}>{value}</option>
                 )}
               </Select>
             </FormControl>
