@@ -7,7 +7,7 @@ import PageNotFound from './pages/PageNotFound/PageNotFound';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Main />}/>
+      <Route path="/converter" element={<Main />}/>
       <Route path="*" element={<PageNotFound />}/>
     </Routes>
   );
